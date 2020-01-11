@@ -49,7 +49,7 @@
 ****************************************************************************/
 
 #include "bookwindow.h"
-
+#include "login.h"
 #include <QtWidgets>
 
 int main(int argc, char * argv[])
@@ -58,7 +58,7 @@ int main(int argc, char * argv[])
 
     QApplication app(argc, argv);
 
-    BookWindow win;
+    Login win;
     win.show();
 
     return app.exec();
