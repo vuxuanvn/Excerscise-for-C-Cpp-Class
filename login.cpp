@@ -16,11 +16,11 @@ Login::~Login()
 
 void Login::on_pushButton_clicked()
 {
+//    ui->lineEdit_2->setEchoMode(QLineEdit::Password);
     QString userName = ui->lineEdit->text();
     QString passWord = ui->lineEdit_2->text();
 
     if(userName == "test" && passWord == "test"){
-        QMessageBox::information(this,"Login", "Username and pass is correct");
         hide();
         bw = new BookWindow();
         bw->show();
