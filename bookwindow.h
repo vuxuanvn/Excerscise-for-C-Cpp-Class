@@ -62,13 +62,20 @@ class BookWindow: public QMainWindow
     Q_OBJECT
 public:
     BookWindow();
+    void searchBook();
+    void addBook();
+//    void allAccount();
+    void borrowBook();
+    void giveBook();
+    void listUserUseBook();
+    Ui::BookWindow ui;
 
 private slots:
     void about();
 
 private:
     void showError(const QSqlError &err);
-    Ui::BookWindow ui;
+
     QSqlRelationalTableModel *model;
     int authorIdx, genreIdx;
 

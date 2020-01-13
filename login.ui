@@ -19,7 +19,7 @@
      <rect>
       <x>9</x>
       <y>9</y>
-      <width>271</width>
+      <width>291</width>
       <height>171</height>
      </rect>
     </property>
@@ -57,7 +57,7 @@
       <rect>
        <x>80</x>
        <y>50</y>
-       <width>161</width>
+       <width>191</width>
        <height>20</height>
       </rect>
      </property>
@@ -67,7 +67,7 @@
       <rect>
        <x>80</x>
        <y>100</y>
-       <width>161</width>
+       <width>191</width>
        <height>20</height>
       </rect>
      </property>
@@ -78,7 +78,7 @@
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
-       <x>170</x>
+       <x>200</x>
        <y>140</y>
        <width>75</width>
        <height>23</height>
@@ -86,6 +86,19 @@
      </property>
      <property name="text">
       <string>Login</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>20</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Tạo tài khoản</string>
      </property>
     </widget>
    </widget>
@@ -96,7 +109,7 @@
      <x>0</x>
      <y>0</y>
      <width>308</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

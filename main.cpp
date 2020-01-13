@@ -50,16 +50,25 @@
 
 #include "bookwindow.h"
 #include "login.h"
+//#include "chagedatauser.h"
 #include <QtWidgets>
-
+#include <QDebug>
+#include "connectdb.h"
+#include "formcreateaccount.h"
 int main(int argc, char * argv[])
 {
     Q_INIT_RESOURCE(books);
 
     QApplication app(argc, argv);
-
+    //chageDataUser user;
+   // user.show();
+   // hide();
+    ConnectDb *cn = new ConnectDb();
+    cn->checkConnect();
     Login win;
     win.show();
+
+   //Login login;
 
     return app.exec();
 }

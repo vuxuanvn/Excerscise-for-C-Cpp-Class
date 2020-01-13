@@ -3,6 +3,8 @@
 #include <QMessageBox>
 #include "connectdb.h"
 #include "formuser1.h"
+#include "formuserdata.h"
+#include "formcreateaccount.h"
 Login::Login(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Login)
@@ -32,7 +34,7 @@ Login::~Login()
 //}
 void Login::on_pushButton_clicked()
 {
-//    ui->lineEdit_2->setEchoMode(QLineEdit::Password);
+    FormUserData *userData = new FormUserData();
     QString uName;
     QString pass;
     QString authority;
@@ -49,14 +51,10 @@ void Login::on_pushButton_clicked()
                     uName = query.value(1).toString();
                     pass = query.value(2).toString();
                     authority = query.value(3).toString();
-                   qDebug() << uName << pass << id <<authority;
-                   count++;
-
+                    qDebug() << uName << pass << id <<authority;
+                    count++;
                }
     }
-
-
-    if(userName == "test" && passWord == "test"){
     if (count!=0 ) {
         QMessageBox::information(this,"Login", "Username and pass is correct");
         hide();
@@ -66,13 +64,14 @@ void Login::on_pushButton_clicked()
            // qDebug() << bw->getName();
 
             bw->show();
-            bw->ui.lblavlelklevkevmk->setText(uName);
+            //bw->ui.lblavlelklevkevmk->setText(uName);
         } else{
-            qDebug() << "ok";
-            FormUser1 *u = new FormUser1();
-            u->ui.labelTen->setText(uName);
-            u->show();
-
+         //   qDebug() << "ok";
+          //  FormUser1 *u = new FormUser1();
+            //u->ui.labelTen->setText(uName);
+          //  u->show();
+            this->setVisible(false);
+            userData->show();
         }
 
 
@@ -82,4 +81,11 @@ void Login::on_pushButton_clicked()
         QMessageBox::warning(this,"Login", "not correct");
     }
 
+}
+
+void Login::on_pushButton_2_clicked()
+{
+  this->setVisible(false);
+  FormCreateAccount *createAccount = new FormCreateAccount();
+  createAccount->show();
 }

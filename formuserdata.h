@@ -15,6 +15,7 @@ public:
   explicit FormUserData(QWidget *parent = nullptr);
   ~FormUserData();
 
+
 private:
   Ui::FormUserData *ui;
 

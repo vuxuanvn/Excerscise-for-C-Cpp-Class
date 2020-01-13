@@ -15,9 +15,12 @@ public:
   explicit FormCreateAccount(QWidget *parent = nullptr);
   ~FormCreateAccount();
 
-private slots:
-  void on_pushButton_clicked();
+//private slots:
+  //void on_pushButton_clicked();
 
+  //void on_pushButton_2_clicked();
+
+private slots:
   void on_pushButton_2_clicked();
 
 private:

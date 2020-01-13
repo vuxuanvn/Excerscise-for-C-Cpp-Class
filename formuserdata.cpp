@@ -13,10 +13,24 @@ FormUserData::FormUserData(QWidget *parent) :
 
 {
   ui->setupUi(this);
-  ui->lineEdit->setText(this->name);
-  ui->lineEdit_2->setText(this->phone);
-  ui->lineEdit_3->setText(this->address);
-  ui->lineEdit_4->setText(this->birth_year);
+  QSqlQuery query;
+  QString name,phone,address,birth_year;
+  query.prepare("SELECT * FROM account WHERE id='3'");
+  if(query.exec()){
+      while (query.next()) {
+          name = query.value(1).toString();
+          address = query.value(4).toString();
+          phone = query.value(5).toString();
+          birth_year = query.value(6).toString();
+     }
+      ui->lineEdit->setText(name);
+      ui->lineEdit_2->setText(phone);
+      ui->lineEdit_3->setText(address);
+      ui->lineEdit_4->setText(birth_year);
+     //QMessageBox::information(this,name, "Cập nhật thành công");
+  }/*else{
+     QMessageBox::warning(this,name, "Thất bại");
+  }*/
   qDebug() << "name==" << this->name;
   qDebug() << "phone==" << this->phone;
   qDebug() << "address==" << this->address;
@@ -33,12 +47,11 @@ void FormUserData::on_pushButton_clicked()
    Login login;
    QSqlQuery query;
    QString name,phone,address,birth_year;
-
    name=ui->lineEdit->text();
    phone=ui->lineEdit_2->text();
    address=ui->lineEdit_3->text();
    birth_year=ui->lineEdit_4->text();
-   query.prepare("update account set username='"+name+"',ac_address='"+address+"',us_phone='"+phone+"',us_birthYear='"+birth_year+"'");
+   query.prepare("update account set username='"+name+"',ac_address='"+address+"',us_phone='"+phone+"',us_birthYear='"+birth_year+"' where id = '3'");
    if(query.exec()){
       QMessageBox::information(this,name, "Cập nhật thành công");
    }else{
@@ -60,28 +73,4 @@ void FormUserData::on_pushButton_3_clicked()
     hide();
     FormChangePasswd *changePass = new FormChangePasswd();
     changePass->show();
-    QSqlQuery query,query1;
-    QString old_passwd,new_passwd,again_passwd;
-    old_passwd=ui->lineEdit->text();
-    new_passwd=ui->lineEdit_2->text();
-    again_passwd=ui->lineEdit_3->text();
-    query.prepare("update account set password='"+old_passwd+"'");
-    if(query.exec()){
-      if(new_passwd.length() < 8){
-         QMessageBox::warning(this,name, "Mật khẩu mới phải có ít nhất 8 kí tự");
-      }
-      if(new_passwd != again_passwd){
-         QMessageBox::warning(this,name, "Nhập lại mật khẩu không đúng");
-      }
-      query1.prepare("update account set password='"+new_passwd+"'");
-      if(query1.exec()){
-         QMessageBox::information(this,name, "Đổi mật khẩu thành công");
-      }else{
-         QMessageBox::warning(this,name, "Thất bại");
-      }
-
-    }else{
-       QMessageBox::warning(this,name, "Mật khẩu cũ không đúng!");
-    }
-
 }

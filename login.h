@@ -16,13 +16,16 @@ public:
     explicit Login(QWidget *parent = nullptr);
     ~Login();
 
-private slots:
+public slots:
     void on_pushButton_clicked();
 
 private:
     Ui::Login *ui;
     BookWindow *bw;
-
+public:
+    QString *user_passwd;
+private slots:
+    void on_pushButton_2_clicked();
 };
 
 #endif // LOGIN_H

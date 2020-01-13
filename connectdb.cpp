@@ -13,7 +13,7 @@ bool ConnectDb::checkConnect()
     QSqlDatabase db = QSqlDatabase::addDatabase( "QODBC" );
 
       db.setHostName( "localhost" );
-      db.setDatabaseName( "Driver={MySQL ODBC 8.0 Unicode Driver};DATABASE=qlsach;"  );
+      db.setDatabaseName( "Driver={MySQL ODBC 8.0 ANSI Driver};DATABASE=qlsach;"  );
 
       db.setUserName( "root" );
       db.setPassword( "" );

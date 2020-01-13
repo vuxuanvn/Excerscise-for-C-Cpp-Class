@@ -50,27 +50,36 @@
 
 #include "bookwindow.h"
 #include "bookdelegate.h"
-#include "initdb.h"
+#include "login.h"
 
+#include "searchbook.h"
+#include "addbook.h"
 #include <QtSql>
+#include "changepassword.h"
+#include "borrowbook.h"
+#include "givebook.h";
+#include "listusebook.h"
 
 BookWindow::BookWindow()
 {
     ui.setupUi(this);
 
-    if (!QSqlDatabase::drivers().contains("QSQLITE"))
+
+    if (!QSqlDatabase::drivers().contains("QODBC"))
         QMessageBox::critical(
                     this,
                     "Unable to load database",
-                    "This demo needs the SQLITE driver"
+                    "This demo needs the QODBC driver"
                     );
 
     // Initialize the database:
-    QSqlError err = initDb();
-    if (err.type() != QSqlError::NoError) {
-        showError(err);
-        return;
-    }
+//    QSqlError err = initDb();
+//    if (err.type() != QSqlError::NoError) {
+//        showError(err);
+//        return;
+//    }
+
+
 
     // Create the data model:
     model = new QSqlRelationalTableModel(ui.bookTable);
@@ -145,22 +154,44 @@ void BookWindow::showError(const QSqlError &err)
                 "Error initializing database: " + err.text());
 }
 
+
 void BookWindow::createMenuBar()
 {
+
+    QAction *searchBook = new QAction(tr("&Search"), this);
+    QAction *addBook = new QAction(tr("&AddBook"), this);
+    QAction *allAccount = new QAction(tr("&AllAccount"), this);
+    QAction *borrowBook = new QAction(tr("&borrowBook"), this);
+     QAction *giveBook = new QAction(tr("&giveBook"), this);
+     QAction *listUserUseBook = new QAction(tr("&listuserusebook"), this);
     QAction *quitAction = new QAction(tr("&Quit"), this);
     QAction *aboutAction = new QAction(tr("&About"), this);
     QAction *aboutQtAction = new QAction(tr("&About Qt"), this);
 
+
     QMenu *fileMenu = menuBar()->addMenu(tr("&File"));
+    fileMenu->addAction(searchBook);
+    fileMenu->addAction(addBook);
+    fileMenu->addAction(allAccount);
+    fileMenu->addAction(borrowBook);
+    fileMenu->addAction(giveBook);
+    fileMenu->addAction(listUserUseBook);
     fileMenu->addAction(quitAction);
 
     QMenu *helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAction);
     helpMenu->addAction(aboutQtAction);
 
+    connect(searchBook, &QAction::triggered, this, &BookWindow::searchBook);
+    connect(addBook, &QAction::triggered, this, &BookWindow::addBook);
+//    connect(allAccount, &QAction::triggered, this, &BookWindow::allAccount);
+    connect(borrowBook, &QAction::triggered, this, &BookWindow::borrowBook);
+    connect(giveBook, &QAction::triggered, this, &BookWindow::giveBook);
+    connect(listUserUseBook, &QAction::triggered, this, &BookWindow::listUserUseBook);
     connect(quitAction, &QAction::triggered, this, &BookWindow::close);
     connect(aboutAction, &QAction::triggered, this, &BookWindow::about);
     connect(aboutQtAction, &QAction::triggered, qApp, &QApplication::aboutQt);
+
 }
 
 void BookWindow::about()
@@ -168,4 +199,49 @@ void BookWindow::about()
     QMessageBox::about(this, tr("About Books"),
             tr("<p>The <b>Books</b> example shows how to use Qt SQL classes "
                "with a model/view framework."));
+}
+
+void BookWindow::searchBook()
+{
+    QApplication app();
+    SearchBook *searchBook=new SearchBook();
+    searchBook->show();
+
+}
+
+void BookWindow::addBook()
+{
+    QApplication app();
+    AddBook *addBook=new AddBook();
+    addBook->show();
+
+}
+
+//void BookWindow::allAccount()
+//{
+//    QApplication app();
+//    ChangePassword *allAccount=new ChangePassword();
+//    allAccount->show();
+
+//}
+
+void BookWindow::borrowBook()
+{
+    QApplication app();
+    BorrowBook *borrowBook = new BorrowBook();
+    borrowBook->show();
+}
+
+void BookWindow::giveBook()
+{
+    QApplication app();
+    GiveBook *giveBook = new GiveBook();
+    giveBook->show();
+}
+
+void BookWindow::listUserUseBook()
+{
+    QApplication app();
+    ListUseBook *list = new ListUseBook();
+    list->show();
 }
