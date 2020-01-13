@@ -6,9 +6,15 @@ ChangePassword::ChangePassword(QWidget *parent) :
     ui(new Ui::ChangePassword)
 {
     ui->setupUi(this);
+
+    model = new QSqlTableModel(this);
+    model->setTable("account");
+    model->select();
+    ui->tableAccount->setModel(model);
 }
 
 ChangePassword::~ChangePassword()
 {
     delete ui;
+
 }

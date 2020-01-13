@@ -2,7 +2,7 @@
 #define CHANGEPASSWORD_H
 
 #include <QWidget>
-
+#include <QtSql>
 namespace Ui {
 class ChangePassword;
 }
@@ -17,6 +17,7 @@ public:
 
 private:
     Ui::ChangePassword *ui;
+    QSqlTableModel *model;
 };
 
 #endif // CHANGEPASSWORD_H
