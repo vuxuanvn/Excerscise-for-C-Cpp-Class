@@ -2,7 +2,7 @@
 #define LISTUSEBOOK_H
 
 #include <QWidget>
-
+#include <QtSql>
 namespace Ui {
 class ListUseBook;
 }
@@ -17,6 +17,8 @@ public:
 
 private:
     Ui::ListUseBook *ui;
+    QSqlRelationalTableModel *model;
+    int userID;
 };
 
 #endif // LISTUSEBOOK_H
